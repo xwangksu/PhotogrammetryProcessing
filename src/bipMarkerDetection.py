@@ -27,12 +27,14 @@ srcGCPFile = args.gcpFile
 #------------------------------------------------------------------------
 # Parameters that may need to be modified
 # Set the GCP area filter value
-th_GCP = 210
+th_GCP = 200
 # Set the Gaussian filter size
 gaussian_size = 3
 # Set the detected contour area size
-contour_min_size = 30
-contour_max_size = 120
+#30
+contour_min_size = 20
+#120
+contour_max_size = 80
 #------------------------------------------------------------------------
 # Function: get GPS location EXIF attributes 
 def getExifFromImage(srcImage):
@@ -96,8 +98,8 @@ def matachGCP(theDist, pointCamera, gcpFile):
     gcpLabel = 0
 #     closeGCP = 0
     minDist = 1000
-    secondMinDist = 1000;
-    secGCPLabel = 0;
+    secondMinDist = 1000
+    secGCPLabel = 0
     for gcp in gcpRecord:
         [utmGCPx, utmGCPy, latGCPzone, longGCPzone] = utm.from_latlon(gcp[2],gcp[1])
         point_gcp = numpy.array((utmGCPx, utmGCPy))
@@ -125,7 +127,7 @@ for im in imageFiles:
 # Hence it should be equal to the center of the image
 img_width = 1280
 img_height = 960
-sh_ratio = 0.5
+sh_ratio = 1
 # Set final output file name
 finalFile = open(targetPath+"\\markerList.csv",'wt')
 try:

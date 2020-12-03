@@ -1,11 +1,12 @@
 '''
 Created on Apr 5, 2018
+Updated on Dec 2, 2020
 
 @author: Xu Wang
 '''
 import os
 import argparse
-import PhotoScan
+import Metashape
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -22,17 +23,17 @@ for file in files:
     if file.endswith(".tif"):
         filePath = srcImagePath +"\\calibrated\\"+ file
         file_list.append(filePath)
-app = PhotoScan.Application()
-doc = PhotoScan.app.document
+app = Metashape.Application()
+doc = Metashape.app.document
 
-PhotoScan.app.gpu_mask = 1
-# PhotoScan.app.cpu_enable = 8
+Metashape.app.gpu_mask = 15
+Metashape.app.cpu_enable = False
 
-chunk = PhotoScan.app.document.addChunk()
-chunk.crs = PhotoScan.CoordinateSystem("EPSG::4326")
+chunk = doc.addChunk()
+chunk.crs = Metashape.CoordinateSystem("EPSG::4326")
 # Import photos
-chunk.addPhotos(file_list, PhotoScan.MultiplaneLayout)
-chunk.matchPhotos(accuracy=PhotoScan.HighAccuracy, preselection=PhotoScan.ReferencePreselection, keypoint_limit = 15000, tiepoint_limit = 10000)
+chunk.addPhotos(file_list, Metashape.MultiplaneLayout)
+chunk.matchPhotos(accuracy=Metashape.HighAccuracy, preselection=Metashape.ReferencePreselection, keypoint_limit = 15000, tiepoint_limit = 10000)
 # Align photos                 
 chunk.alignCameras(adaptive_fitting=True)
 # Save project

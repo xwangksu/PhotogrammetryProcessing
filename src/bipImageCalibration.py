@@ -1,5 +1,6 @@
 '''
 Created on June 27, 2019
+Updated on Dec 2, 2020
 
 @author: Xu Wang
 '''
@@ -43,11 +44,11 @@ panelCalibration = {
 #     "NIR": 0.59
 #---------------------
 # RP03-1731145-SC
-#     "Blue": 0.53, 
-#     "Green": 0.53, 
-#     "Red": 0.53, 
-#     "Red edge": 0.51, 
-#     "NIR": 0.48
+    "Blue": 0.53,
+    "Green": 0.53,
+    "Red": 0.53,
+    "Red edge": 0.51,
+    "NIR": 0.48
 #---------------------
 # RP03-1731119-SC
 #     "Blue": 0.53, 
@@ -57,11 +58,11 @@ panelCalibration = {
 #     "NIR": 0.49
 #---------------------
 # RP03-1824474-SC
-    "Blue": 0.53, 
-    "Green": 0.53, 
-    "Red": 0.53, 
-    "Red edge": 0.53, 
-    "NIR": 0.53
+#     "Blue": 0.53,
+#     "Green": 0.53,
+#     "Red": 0.53,
+#     "Red edge": 0.53,
+#     "NIR": 0.53
 #---------------------
 # RP04-1918130-OB
 #     "Blue": 0.536, 
