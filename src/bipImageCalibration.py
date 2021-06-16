@@ -73,7 +73,7 @@ panelCalibration = {
 }
 #------------------------------------------------------------------------
 # For panel detection
-black_th=100 #110
+black_th=90 #110
 # cont_th=13000
 cont_th=0
 #------------------------------------------------------------------------
@@ -171,7 +171,7 @@ if acc > 0:
     imageFiles = os.listdir(filePath+"\\low_altitude")
     exiftoolPath = None
     if os.name == 'nt':
-        exiftoolPath = 'D:/ExifTool/exiftool.exe'
+        exiftoolPath = 'C:/Users/xuwang/Downloads/exiftool/exiftool.exe'
     # Sum of each band's radiance 
     sbr_B = 0
     sbr_G = 0

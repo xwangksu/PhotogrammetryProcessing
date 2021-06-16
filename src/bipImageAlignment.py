@@ -19,10 +19,14 @@ project = workingPath+"\\ortho_dem_process.psx"
 
 files = os.listdir(srcImagePath+"\\calibrated\\")
 file_list=[]
+
 for file in files:
     if file.endswith(".tif"):
         filePath = srcImagePath +"\\calibrated\\"+ file
         file_list.append(filePath)
+
+fileGroups = [5]*(len(file_list)//5)
+
 app = Metashape.Application()
 doc = Metashape.app.document
 
@@ -32,8 +36,8 @@ Metashape.app.cpu_enable = False
 chunk = doc.addChunk()
 chunk.crs = Metashape.CoordinateSystem("EPSG::4326")
 # Import photos
-chunk.addPhotos(file_list, Metashape.MultiplaneLayout)
-chunk.matchPhotos(accuracy=Metashape.HighAccuracy, preselection=Metashape.ReferencePreselection, keypoint_limit = 15000, tiepoint_limit = 10000)
+chunk.addPhotos(filenames = file_list, filegroups = fileGroups, layout = Metashape.MultiplaneLayout)
+chunk.matchPhotos(downscale=1, reference_preselection=True, keypoint_limit = 15000, tiepoint_limit = 8000)
 # Align photos                 
 chunk.alignCameras(adaptive_fitting=True)
 # Save project

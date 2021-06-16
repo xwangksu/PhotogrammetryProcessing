@@ -26,7 +26,7 @@ panelCalibration = {
 #     "Green": 0.67, 
 #     "Red": 0.67, 
 #     "Red edge": 0.66, 
-#     "NIR": 0.6
+#     "NIR": 0.6\
 #---------------------
 # RP02-1603122-SC
 #     "Blue": 0.71, 

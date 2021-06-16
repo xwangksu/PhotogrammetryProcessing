@@ -29,10 +29,10 @@ panelCalibration = {
 #     "NIR": 0.6
 #---------------------
 # RP02-1603122-SC
-#     "Blue": 0.71, 
-#     "Green": 0.72, 
-#     "Red": 0.72, 
-#     "Red edge": 0.7, 
+#     "Blue": 0.71,
+#     "Green": 0.72,
+#     "Red": 0.72,
+#     "Red edge": 0.7,
 #     "NIR": 0.66
 #---------------------
 # RP02-1622013-SC
@@ -64,18 +64,25 @@ panelCalibration = {
 #     "NIR": 0.53
 #---------------------
 # RP04-1918130-OB
-#     "Blue": 0.536, 
-#     "Green": 0.536, 
-#     "Red": 0.534, 
-#     "Red edge": 0.533, 
+#     "Blue": 0.536,
+#     "Green": 0.536,
+#     "Red": 0.534,
+#     "Red edge": 0.533,
 #     "NIR": 0.529
 #---------------------
 # RP04-1841001-SC
-    "Blue": 0.531, 
-    "Green": 0.532, 
-    "Red": 0.532, 
-    "Red edge": 0.53, 
+    "Blue": 0.531,
+    "Green": 0.532,
+    "Red": 0.532,
+    "Red edge": 0.53,
     "NIR": 0.532
+#---------------------
+# RP04-1841005-SC
+#     "Blue": 0.531,
+#     "Green": 0.532,
+#     "Red": 0.532,
+#     "Red edge": 0.53,
+#     "NIR": 0.532
 }
 #------------------------------------------------------------------------
 # For panel detection
@@ -104,7 +111,8 @@ def panelSizeEval(im,b_th):
             shape = sd.detect(c)
         if shape == "square":
             ca = cv2.contourArea(c)
-            if (ca>3000) and (ca<9500): 
+            # print(ca)
+            if (ca>2000) and (ca<9000):
                 # print(ca)
                 sq +=1
                 # cSize = cSize + ca
@@ -195,6 +203,7 @@ if acc > 0:
         imageName = filePath+"\\low_altitude\\"+im
         panelSize = 0
         panelSize = panelSizeEval(imageName, black_th)
+        # print(panelSize)
         if panelSize>0:
             pSizeList.append(panelSize)
     pSizeArray = numpy.asarray(pSizeList)

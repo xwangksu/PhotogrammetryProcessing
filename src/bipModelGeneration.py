@@ -28,11 +28,11 @@ Metashape.app.cpu_enable = False
 chunk = doc.chunk
 chunk.crs = Metashape.CoordinateSystem("EPSG::4326")
 
-chunk.buildDepthMaps(quality=Metashape.HighQuality, filter=Metashape.AggressiveFiltering)
+chunk.buildDepthMaps(downscale=1, filter_mode=Metashape.AggressiveFiltering)
 
 chunk.buildDenseCloud()
 
-chunk.buildModel(surface=Metashape.HeightField, interpolation=Metashape.DisabledInterpolation, face_count=Metashape.HighFaceCount)
+chunk.buildModel(surface_type=Metashape.HeightField, interpolation=Metashape.DisabledInterpolation, face_count=Metashape.HighFaceCount)
 
 doc.save(path=project, chunks=[doc.chunk])
 
@@ -45,12 +45,21 @@ app = Metashape.Application()
 chunk = doc.chunk
 chunk.crs = Metashape.CoordinateSystem("EPSG::4326")
 
-chunk.buildDem(source=Metashape.DataSource.DenseCloudData, interpolation=Metashape.Interpolation.DisabledInterpolation, projection=Metashape.CoordinateSystem("EPSG::4326"))
+proj = Metashape.OrthoProjection()
+proj.crs = Metashape.CoordinateSystem("EPSG::4326")
 
-chunk.buildOrthomosaic(surface=Metashape.DataSource.ElevationData, blending=Metashape.BlendingMode.MosaicBlending, projection=Metashape.CoordinateSystem("EPSG::4326"))
+chunk.buildDem(source_data=Metashape.DataSource.DenseCloudData, interpolation=Metashape.Interpolation.DisabledInterpolation, projection=proj)
 
-chunk.exportDem(dem, image_format=Metashape.ImageFormatTIFF, projection=Metashape.CoordinateSystem("EPSG::4326"), nodata=-9999, write_kml=False, write_world=False, tiff_big=False)
+chunk.buildOrthomosaic(surface_data=Metashape.DataSource.ElevationData, blending_mode=Metashape.BlendingMode.MosaicBlending, projection=proj)
 
-chunk.exportOrthomosaic(orthomosaic, image_format=Metashape.ImageFormatTIFF, raster_transform=Metashape.RasterTransformType.RasterTransformNone, projection=Metashape.CoordinateSystem("EPSG::4326"), write_kml=False, write_world=False, tiff_compression=Metashape.TiffCompressionNone, tiff_big=False)
+compr = Metashape.ImageCompression()
+compr.tiff_compression = Metashape.ImageCompression.TiffCompressionNone
+compr.tiff_big = False
+compr.tiff_overviews = False
+compr.tiff_tiled = False
+
+chunk.exportRaster(path=dem, image_format=Metashape.ImageFormatTIFF, projection=proj, nodata_value=-9999, save_kml=False, save_world=False, image_compression=compr, white_background=False, source_data=Metashape.ElevationData)
+
+chunk.exportRaster(path=orthomosaic, image_format=Metashape.ImageFormatTIFF, projection=proj, save_kml=False, save_world=False, image_compression=compr, white_background=False, source_data=Metashape.OrthomosaicData)
 
 doc.save(path=project, chunks=[doc.chunk])
