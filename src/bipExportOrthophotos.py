@@ -31,9 +31,18 @@ doc.open(project)
 chunk = doc.chunk
 chunk.crs = PhotoScan.CoordinateSystem("EPSG::4326")
 
-chunk.exportOrthophotos(path=workingPath+"orthophotos\\{filename}.tif", cameras=chunk.cameras, raster_transform=PhotoScan.RasterTransformType.RasterTransformNone,
-                        projection=chunk.crs, write_kml=False,
-                        write_world=False, write_alpha=False, tiff_compression=PhotoScan.TiffCompression.TiffCompressionNone,
-                        tiff_big=False, tiff_overviews=True, jpeg_quality=100, white_background=False)    
+proj = Metashape.OrthoProjection()
+proj.crs = Metashape.CoordinateSystem("EPSG::4326")
+
+compr = Metashape.ImageCompression()
+compr.tiff_compression = Metashape.ImageCompression.TiffCompressionNone
+compr.tiff_big = False
+compr.tiff_overviews = False
+compr.tiff_tiled = False
+
+chunk.exportOrthophotos(path=workingPath+"orthophotos\\{filename}.tif", cameras=chunk.cameras, raster_transform=Metashape.RasterTransformNone,
+                        projection=proj, save_kml=False,
+                        save_world=False, save_alpha=False, image_compression=compr,
+                        white_background=False)
 
 doc.save(path=project, chunks=[doc.chunk])
