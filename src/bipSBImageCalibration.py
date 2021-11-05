@@ -1,5 +1,6 @@
 '''
 Created on June 27, 2019
+Updated on Dec 2, 2020
 
 @author: Xu Wang
 '''
@@ -26,7 +27,7 @@ panelCalibration = {
 #     "Green": 0.67, 
 #     "Red": 0.67, 
 #     "Red edge": 0.66, 
-#     "NIR": 0.6\
+#     "NIR": 0.6
 #---------------------
 # RP02-1603122-SC
 #     "Blue": 0.71, 
@@ -43,24 +44,24 @@ panelCalibration = {
 #     "NIR": 0.59
 #---------------------
 # RP03-1731145-SC
-#     "Blue": 0.53, 
-#     "Green": 0.53, 
-#     "Red": 0.53, 
-#     "Red edge": 0.51, 
+#     "Blue": 0.53,
+#     "Green": 0.53,
+#     "Red": 0.53,
+#     "Red edge": 0.51,
 #     "NIR": 0.48
 #---------------------
 # RP03-1731119-SC
-    "Blue": 0.53, 
-    "Green": 0.54, 
-    "Red": 0.53, 
-    "Red edge": 0.52, 
-    "NIR": 0.49
+#     "Blue": 0.53, 
+#     "Green": 0.54, 
+#     "Red": 0.53, 
+#     "Red edge": 0.52, 
+#     "NIR": 0.49
 #---------------------
 # RP03-1824474-SC
-#     "Blue": 0.53, 
-#     "Green": 0.53, 
-#     "Red": 0.53, 
-#     "Red edge": 0.53, 
+#     "Blue": 0.53,
+#     "Green": 0.53,
+#     "Red": 0.53,
+#     "Red edge": 0.53,
 #     "NIR": 0.53
 #---------------------
 # RP04-1918130-OB
@@ -69,10 +70,16 @@ panelCalibration = {
 #     "Red": 0.534, 
 #     "Red edge": 0.533, 
 #     "NIR": 0.529
+# RP04-1814046-SC
+    "Blue": 0.489,
+    "Green": 0.490,
+    "Red": 0.489,
+    "Red edge": 0.486,
+    "NIR": 0.488
 }
 #------------------------------------------------------------------------
 # For panel detection
-black_th=100 #110
+black_th=90 #110
 # cont_th=13000
 cont_th=0
 #------------------------------------------------------------------------
@@ -98,7 +105,7 @@ def panelSizeEval(im,b_th):
         if shape == "square":
             ca = cv2.contourArea(c)
             # print(ca)
-            if (ca>2000) and (ca<8500):
+            if (ca>4000) and (ca<20500):
                 # print(ca)
                 sq +=1
                 # cSize = cSize + ca
@@ -129,7 +136,7 @@ def panelDetect(im,b_th,ct_th):
             shape = sd.detect(c)
         if shape == "square":
             ca = cv2.contourArea(c)
-            if (ca>ct_th-1500) and (ca<ct_th+1500):
+            if (ca>ct_th-2000) and (ca<ct_th+2000):
                 sq +=1
                 c = c.astype("float")
                 c *= ratio

@@ -29,11 +29,11 @@ panelCalibration = {
 #     "NIR": 0.6
 #---------------------
 # RP02-1603122-SC
-#     "Blue": 0.71,
-#     "Green": 0.72,
-#     "Red": 0.72,
-#     "Red edge": 0.7,
-#     "NIR": 0.66
+    "Blue": 0.71,
+    "Green": 0.72,
+    "Red": 0.72,
+    "Red edge": 0.7,
+    "NIR": 0.66
 #---------------------
 # RP02-1622013-SC
 #     "Blue": 0.63, 
@@ -71,11 +71,11 @@ panelCalibration = {
 #     "NIR": 0.529
 #---------------------
 # RP04-1841001-SC
-    "Blue": 0.531,
-    "Green": 0.532,
-    "Red": 0.532,
-    "Red edge": 0.53,
-    "NIR": 0.532
+#     "Blue": 0.531,
+#     "Green": 0.532,
+#     "Red": 0.532,
+#     "Red edge": 0.53,
+#     "NIR": 0.532
 #---------------------
 # RP04-1841005-SC
 #     "Blue": 0.531,
@@ -112,7 +112,7 @@ def panelSizeEval(im,b_th):
         if shape == "square":
             ca = cv2.contourArea(c)
             # print(ca)
-            if (ca>2000) and (ca<9000):
+            if (ca>6000) and (ca<18000):
                 # print(ca)
                 sq +=1
                 # cSize = cSize + ca
